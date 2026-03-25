@@ -10,153 +10,170 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Warm, high-contrast palette — not the usual cold dark mode */
-  --bg:#faf8f5;
-  --bg2:#f2eeea;
-  --bg3:#e8e2db;
-  --ink:#1a1613;
-  --ink2:#5c534a;
-  --ink3:#8a8078;
+  --bg:#0d1117;
+  --bg2:#151b23;
+  --bg3:#1c2432;
+  --bg4:#2a3444;
+  --border:#2a3444;
+  --border-light:#364054;
   
-  /* The brand: a deep, confident teal — not startup green */
-  --brand:#1a6b5a;
-  --brand-light:#e8f4f0;
-  --brand-dark:#0f4035;
+  --fg:#e6edf3;
+  --fg2:#9eaab8;
+  --fg3:#6b7a8d;
   
-  /* Warm amber for accents */
-  --amber:#c4841d;
-  --amber-light:#fef3e2;
+  /* Brand: vivid teal-cyan — distinctive, not generic green */
+  --brand:#2dd4a8;
+  --brand-dim:#1a9e7e;
+  --brand-deep:#0f6b55;
+  --brand-glow:rgba(45,212,168,0.12);
+  --brand-glow2:rgba(45,212,168,0.06);
   
-  /* Signal colors */
-  --up:#1a6b5a;
-  --down:#b5342a;
-  --mid:#946b2d;
+  /* Warm accent — amber/gold for contrast */
+  --accent:#f0b429;
+  --accent-glow:rgba(240,180,41,0.1);
   
-  /* Grades */
-  --ga:#1a6b5a;--ga-bg:#e8f4f0;
-  --gb:#2d5f9e;--gb-bg:#e8f0fa;
-  --gc:#946b2d;--gc-bg:#f5efe2;
-  --gd:#b56a25;--gd-bg:#faf0e4;
-  --gf:#b5342a;--gf-bg:#fae8e6;
+  /* Cool accent — for variety */
+  --blue:#58a6ff;
+  --blue-glow:rgba(88,166,255,0.1);
   
-  --serif:'Fraunces',Georgia,'Times New Roman',serif;
-  --sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  /* Signal / grades */
+  --ga:#2dd4a8;--ga-bg:rgba(45,212,168,0.12);
+  --gb:#58a6ff;--gb-bg:rgba(88,166,255,0.12);
+  --gc:#f0b429;--gc-bg:rgba(240,180,41,0.12);
+  --gd:#f08c29;--gd-bg:rgba(240,140,41,0.12);
+  --gf:#f04848;--gf-bg:rgba(240,72,72,0.12);
+  
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --mono:'JetBrains Mono','SF Mono',Consolas,monospace;
   --max:1080px;
-  --radius:8px;
+  --radius:10px;
+  --radius-sm:6px;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:15px}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:15px}
 a{color:var(--brand);text-decoration:none}
 a:hover{text-decoration:underline}
 .container{max-width:var(--max);margin:0 auto;padding:0 24px}
-code,.mono{font-family:var(--mono);font-size:0.88em}
 
 /* ===== NAV ===== */
-nav{border-bottom:1px solid var(--bg3);padding:20px 0}
+nav{border-bottom:1px solid var(--border);padding:18px 0}
 nav .container{display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:var(--serif);font-weight:800;font-size:1.35rem;color:var(--ink);text-decoration:none;letter-spacing:-0.03em}
+.logo{font-family:var(--serif);font-weight:800;font-size:1.3rem;color:var(--fg);text-decoration:none;letter-spacing:-0.03em}
 .logo:hover{text-decoration:none}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{color:var(--ink2);font-size:0.88rem;font-weight:500;text-decoration:none;transition:color .15s}
-.nav-links a:hover{color:var(--ink)}
+.logo span{color:var(--brand)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:var(--fg2);font-size:0.88rem;font-weight:500;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--fg)}
 
 /* ===== HERO ===== */
-.hero{padding:100px 0 80px;max-width:720px;margin:0 auto}
-.hero-label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);margin-bottom:20px;font-weight:600}
-.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,5.5vw,3.6rem);font-weight:800;letter-spacing:-0.035em;line-height:1.1;margin-bottom:24px;color:var(--ink)}
-.hero p{font-size:1.1rem;color:var(--ink2);max-width:520px;line-height:1.7;margin-bottom:40px}
-.search-bar{display:flex;gap:0;max-width:520px;border:2px solid var(--bg3);border-radius:var(--radius);overflow:hidden;transition:border-color .2s}
+.hero-wrap{position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,var(--brand-glow) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.hero{padding:100px 0 72px;max-width:680px;position:relative;z-index:1}
+.hero-label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);margin-bottom:20px;font-weight:600;display:flex;align-items:center;gap:8px}
+.hero-label::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,5.5vw,3.6rem);font-weight:800;letter-spacing:-0.035em;line-height:1.1;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--brand)}
+.hero p{font-size:1.08rem;color:var(--fg2);max-width:520px;line-height:1.7;margin-bottom:36px}
+.search-bar{display:flex;gap:0;max-width:520px;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg2);transition:border-color .2s}
 .search-bar:focus-within{border-color:var(--brand)}
-.search-bar input{flex:1;padding:16px 20px;background:transparent;border:none;color:var(--ink);font-family:var(--mono);font-size:0.85rem;outline:none}
-.search-bar input::placeholder{color:var(--ink3)}
-.search-bar button{padding:16px 24px;background:var(--ink);color:var(--bg);font-weight:600;border:none;cursor:pointer;font-size:0.88rem;font-family:var(--sans);transition:background .15s}
-.search-bar button:hover{background:var(--brand-dark)}
+.search-bar input{flex:1;padding:15px 20px;background:transparent;border:none;color:var(--fg);font-family:var(--mono);font-size:0.84rem;outline:none}
+.search-bar input::placeholder{color:var(--fg3)}
+.search-bar button{padding:15px 24px;background:var(--brand);color:var(--bg);font-weight:700;border:none;cursor:pointer;font-size:0.88rem;font-family:var(--sans);transition:all .15s}
+.search-bar button:hover{background:var(--brand-dim)}
 
-/* ===== LIVE TICKER ===== */
-.ticker{display:flex;gap:32px;flex-wrap:wrap;margin-top:32px}
-.tick{display:flex;flex-direction:column}
-.tick-val{font-family:var(--mono);font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;color:var(--ink)}
-.tick-label{font-size:0.72rem;color:var(--ink3);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+/* ===== STATS ROW ===== */
+.stats-row{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:40px;background:var(--bg2)}
+.stat{flex:1;padding:20px 24px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-family:var(--mono);font-size:1.4rem;font-weight:600;letter-spacing:-0.02em}
+.stat-val .c1{color:var(--brand)}
+.stat-val .c2{color:var(--blue)}
+.stat-val .c3{color:var(--accent)}
+.stat-label{font-size:0.7rem;color:var(--fg3);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px}
 
-/* ===== DIVIDER ===== */
-.divider{height:1px;background:var(--bg3);margin:0}
+/* ===== CHAINS ===== */
+.chain-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;font-size:0.78rem;color:var(--fg2);transition:all .15s}
+.chip:hover{border-color:var(--brand-dim);color:var(--fg)}
+.chip b{color:var(--brand);font-family:var(--mono);font-weight:600}
+
+/* ===== SECTIONS ===== */
+.section{padding:72px 0}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.section-title{font-family:var(--serif);font-size:1.45rem;font-weight:700;letter-spacing:-0.02em}
+.section-link{font-size:0.84rem;color:var(--fg3);font-weight:500;transition:color .15s}
+.section-link:hover{color:var(--brand)}
+.divider{height:1px;background:var(--border);margin:0;border:none}
 
 /* ===== LEADERBOARD ===== */
-.section{padding:72px 0}
-.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;flex-wrap:wrap;gap:12px}
-.section-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:-0.02em}
-.section-link{font-size:0.85rem;color:var(--ink2);font-weight:500}
-.section-link:hover{color:var(--brand)}
-
-.board{border:1px solid var(--bg3);border-radius:var(--radius);overflow:hidden}
-.board-row{display:grid;grid-template-columns:48px 1fr 80px 56px 80px 90px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--bg3);transition:background .1s;cursor:pointer;gap:8px}
+.board{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg2)}
+.board-row{display:grid;grid-template-columns:44px 1fr 72px 48px 80px 80px;align-items:center;padding:13px 20px;border-bottom:1px solid var(--border);transition:background .1s;cursor:pointer;gap:8px}
 .board-row:last-child{border-bottom:none}
-.board-row:hover{background:var(--bg2)}
-.board-head{background:var(--bg2);padding:10px 20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink3);cursor:default}
-.board-head:hover{background:var(--bg2)}
-.board-rank{font-family:var(--mono);font-size:0.8rem;color:var(--ink3)}
+.board-row:hover{background:var(--bg3)}
+.board-head{padding:10px 20px;font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--fg3);cursor:default;background:rgba(0,0,0,0.15)}
+.board-head:hover{background:rgba(0,0,0,0.15)}
+.board-rank{font-family:var(--mono);font-size:0.78rem;color:var(--fg3)}
 .board-agent{display:flex;flex-direction:column;gap:1px;min-width:0}
-.board-name{font-weight:600;font-size:0.92rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.board-addr{font-family:var(--mono);font-size:0.72rem;color:var(--ink3)}
-.board-chain{font-size:0.78rem;color:var(--ink2)}
-.board-score{font-family:var(--mono);font-weight:600;font-size:0.95rem;text-align:right}
+.board-name{font-weight:600;font-size:0.92rem;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.board-addr{font-family:var(--mono);font-size:0.7rem;color:var(--fg3)}
+.board-score{font-family:var(--mono);font-weight:600;font-size:0.95rem;text-align:right;color:var(--brand)}
+.board-chain{font-size:0.78rem;color:var(--fg2)}
+.board-txns{font-family:var(--mono);font-size:0.8rem;color:var(--fg2);text-align:right}
 
-.grade{display:inline-flex;align-items:center;justify-content:center;width:32px;height:22px;border-radius:4px;font-weight:700;font-size:0.72rem;font-family:var(--mono)}
+.grade{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:22px;padding:0 6px;border-radius:var(--radius-sm);font-weight:700;font-size:0.72rem;font-family:var(--mono)}
 .grade-A{background:var(--ga-bg);color:var(--ga)}
 .grade-B{background:var(--gb-bg);color:var(--gb)}
 .grade-C{background:var(--gc-bg);color:var(--gc)}
 .grade-D{background:var(--gd-bg);color:var(--gd)}
 .grade-F{background:var(--gf-bg);color:var(--gf)}
 
-.board-txns{font-family:var(--mono);font-size:0.82rem;color:var(--ink2);text-align:right}
-
-/* ===== CHAINS ===== */
-.chains{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
-.chain{display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--bg3);border-radius:var(--radius);font-size:0.82rem;color:var(--ink2);transition:all .15s}
-.chain:hover{border-color:var(--ink3);color:var(--ink)}
-.chain-count{font-family:var(--mono);font-weight:600;color:var(--ink)}
-
-/* ===== WHAT IS SECTION ===== */
+/* ===== EXPLAIN ===== */
 .explain{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.explain-text h2{font-family:var(--serif);font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;line-height:1.2}
-.explain-text p{color:var(--ink2);line-height:1.7;margin-bottom:16px}
-.explain-text p strong{color:var(--ink);font-weight:600}
-.explain-visual{background:var(--bg2);border:1px solid var(--bg3);border-radius:var(--radius);padding:32px;font-family:var(--mono);font-size:0.82rem}
-.explain-visual .ev-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bg3);color:var(--ink2)}
-.explain-visual .ev-line:last-child{border-bottom:none}
-.explain-visual .ev-key{color:var(--ink3)}
-.explain-visual .ev-val{color:var(--ink);font-weight:600}
-.explain-visual .ev-val.good{color:var(--up)}
-.explain-visual .ev-val.mid{color:var(--mid)}
-.explain-visual .ev-val.bad{color:var(--down)}
-.explain-visual .ev-header{font-weight:600;color:var(--ink);padding-bottom:12px;margin-bottom:4px;border-bottom:2px solid var(--ink);font-size:0.88rem}
+.explain-text h2{font-family:var(--serif);font-size:1.75rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;line-height:1.2}
+.explain-text p{color:var(--fg2);line-height:1.7;margin-bottom:16px}
+.explain-text strong{color:var(--fg);font-weight:600}
+.api-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.api-card-header{display:flex;align-items:center;gap:8px;padding:12px 20px;border-bottom:1px solid var(--border);font-size:0.78rem}
+.api-card-header .method{font-family:var(--mono);font-weight:700;color:var(--brand);font-size:0.72rem;background:var(--brand-glow);padding:3px 8px;border-radius:4px}
+.api-card-header .endpoint{font-family:var(--mono);color:var(--fg2)}
+.api-card-body{padding:16px 20px;font-family:var(--mono);font-size:0.78rem;line-height:1.9}
+.api-card-body .k{color:var(--fg3)}
+.api-card-body .s{color:var(--brand)}
+.api-card-body .n{color:var(--accent)}
+.api-card-body .b{color:var(--blue)}
 
 /* ===== PRINCIPLES ===== */
-.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bg3);border:1px solid var(--bg3);border-radius:var(--radius);overflow:hidden}
-.principle{background:var(--bg);padding:36px 28px}
-.principle-num{font-family:var(--mono);font-size:0.7rem;color:var(--ink3);letter-spacing:0.1em;margin-bottom:12px}
-.principle h3{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--ink);letter-spacing:-0.01em}
-.principle p{font-size:0.88rem;color:var(--ink2);line-height:1.6}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.principle{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;transition:border-color .2s}
+.principle:hover{border-color:var(--border-light)}
+.principle-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:16px}
+.principle-icon.pi1{background:var(--brand-glow)}
+.principle-icon.pi2{background:var(--accent-glow)}
+.principle-icon.pi3{background:var(--blue-glow)}
+.principle h3{font-size:0.95rem;font-weight:700;margin-bottom:8px;color:var(--fg);letter-spacing:-0.01em}
+.principle p{font-size:0.85rem;color:var(--fg2);line-height:1.6}
 
 /* ===== CTA ===== */
-.cta{text-align:center;padding:80px 0}
+.cta{text-align:center;padding:80px 0;position:relative}
 .cta h2{font-family:var(--serif);font-size:1.8rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px}
-.cta p{color:var(--ink2);margin-bottom:32px;font-size:1rem}
+.cta p{color:var(--fg2);margin-bottom:32px;font-size:1rem}
 .cta-buttons{display:flex;gap:12px;justify-content:center}
-.btn{padding:14px 28px;border-radius:var(--radius);font-weight:600;font-size:0.9rem;cursor:pointer;border:none;text-decoration:none;transition:all .15s;display:inline-block;font-family:var(--sans)}
+.btn{padding:13px 28px;border-radius:var(--radius);font-weight:600;font-size:0.9rem;cursor:pointer;border:none;text-decoration:none;transition:all .15s;display:inline-block;font-family:var(--sans)}
 .btn:hover{text-decoration:none}
-.btn-dark{background:var(--ink);color:var(--bg)}
-.btn-dark:hover{background:var(--brand-dark)}
-.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--bg3)}
-.btn-outline:hover{border-color:var(--ink3)}
+.btn-brand{background:var(--brand);color:var(--bg)}
+.btn-brand:hover{background:var(--brand-dim)}
+.btn-ghost{background:transparent;color:var(--fg);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--border-light)}
 
 /* ===== FOOTER ===== */
-footer{border-top:1px solid var(--bg3);padding:32px 0;color:var(--ink3);font-size:0.82rem}
+footer{border-top:1px solid var(--border);padding:32px 0;color:var(--fg3);font-size:0.82rem}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-links{display:flex;gap:24px}
-.footer-links a{color:var(--ink3);transition:color .15s}
-.footer-links a:hover{color:var(--ink)}
+.footer-links a{color:var(--fg3);transition:color .15s}
+.footer-links a:hover{color:var(--fg)}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -164,28 +181,25 @@ footer{border-top:1px solid var(--bg3);padding:32px 0;color:var(--ink3);font-siz
   .board-row .board-chain,.board-row .board-txns{display:none}
   .explain{grid-template-columns:1fr;gap:32px}
   .principles{grid-template-columns:1fr}
-  .hero{padding:60px 24px 48px}
-  .ticker{gap:20px}
-  .tick-val{font-size:1.2rem}
+  .stats-row{flex-wrap:wrap}
+  .stat{min-width:50%;border-bottom:1px solid var(--border)}
+  .hero{padding:64px 0 48px}
   .footer-inner{flex-direction:column;text-align:center}
 }
 @media(max-width:480px){
-  .nav-links{gap:16px}
-  .nav-links a{font-size:0.82rem}
-  .hero h1{font-size:2.2rem}
-  .chains{gap:6px}
-  .chain{padding:8px 12px;font-size:0.78rem}
+  .stats-row{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
 }
 
-/* ===== PREVIEW BADGE ===== */
-.preview{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:20px;font-size:0.78rem;font-weight:500;z-index:200;opacity:0.9}
+.preview{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border);color:var(--fg2);padding:10px 20px;border-radius:20px;font-size:0.75rem;font-weight:500;z-index:200}
 </style>
 </head>
 <body>
 
 <nav>
 <div class="container">
-  <a href="#" class="logo">AgentScore</a>
+  <a href="#" class="logo">Agent<span>Score</span></a>
   <div class="nav-links">
     <a href="#">Directory</a>
     <a href="#">Economy</a>
@@ -195,29 +209,43 @@ footer{border-top:1px solid var(--bg3);padding:32px 0;color:var(--ink3);font-siz
 </div>
 </nav>
 
+<div class="hero-wrap">
+<div class="hero-glow"></div>
+<div class="hero-glow2"></div>
 <div class="container">
 
 <section class="hero">
-  <div class="hero-label">220,000+ agents scored</div>
-  <h1>The credit bureau for AI agents</h1>
+  <div class="hero-label">Live — 220,000+ agents indexed</div>
+  <h1>The credit bureau for <em>AI&nbsp;agents</em></h1>
   <p>Trust grades built from real transaction history — not self-reported claims. Look up any agent making payments on-chain.</p>
   <div class="search-bar">
     <input type="text" placeholder="0x... or agent name" spellcheck="false">
     <button>Look up</button>
   </div>
-  <div class="ticker">
-    <div class="tick"><span class="tick-val">75,812</span><span class="tick-label">Agents scored</span></div>
-    <div class="tick"><span class="tick-val">770K</span><span class="tick-label">Transactions</span></div>
-    <div class="tick"><span class="tick-val">7</span><span class="tick-label">Chains</span></div>
-    <div class="tick"><span class="tick-val">47,243</span><span class="tick-label">ERC-8004 agents</span></div>
-  </div>
 </section>
 
+<div class="stats-row">
+  <div class="stat"><div class="stat-val"><span class="c1">75,812</span></div><div class="stat-label">Agents scored</div></div>
+  <div class="stat"><div class="stat-val"><span class="c2">770K</span></div><div class="stat-label">Transactions</div></div>
+  <div class="stat"><div class="stat-val"><span class="c3">47,243</span></div><div class="stat-label">ERC-8004 agents</div></div>
+  <div class="stat"><div class="stat-val">7</div><div class="stat-label">Chains</div></div>
 </div>
 
-<hr class="divider">
+<div class="chain-row">
+  <span class="chip">Base <b>35.3K</b></span>
+  <span class="chip">Ethereum <b>29.2K</b></span>
+  <span class="chip">Celo <b>4.5K</b></span>
+  <span class="chip">Gnosis <b>3.2K</b></span>
+  <span class="chip">Avalanche <b>1.7K</b></span>
+  <span class="chip">Arbitrum <b>715</b></span>
+  <span class="chip">Optimism <b>464</b></span>
+</div>
+
+</div>
+</div>
 
 <div class="container">
+<hr class="divider">
 
 <section class="section">
   <div class="section-head">
@@ -285,82 +313,74 @@ footer{border-top:1px solid var(--bg3);padding:32px 0;color:var(--ink3);font-siz
       <span class="board-txns">189</span>
     </div>
   </div>
-
-  <div class="chains">
-    <div class="chain">Base <span class="chain-count">35.3K</span></div>
-    <div class="chain">Ethereum <span class="chain-count">29.2K</span></div>
-    <div class="chain">Celo <span class="chain-count">4.5K</span></div>
-    <div class="chain">Gnosis <span class="chain-count">3.2K</span></div>
-    <div class="chain">Avalanche <span class="chain-count">1.7K</span></div>
-    <div class="chain">Arbitrum <span class="chain-count">715</span></div>
-    <div class="chain">Optimism <span class="chain-count">464</span></div>
-  </div>
 </section>
-
-</div>
 
 <hr class="divider">
 
-<div class="container">
 <section class="section">
   <div class="explain">
     <div class="explain-text">
       <h2>What is an agent score?</h2>
       <p>Every AI agent that transacts on-chain leaves a trail. We analyze that trail — <strong>payment volume, counterparty diversity, consistency, history length</strong> — and distill it into a single trust grade.</p>
-      <p>Think of it like a FICO score, but for autonomous software. Before you let an agent access your API, spend your money, or act on your behalf — check the score.</p>
-      <p>Scores are <strong>curved across the population</strong>, so grades are always relative. An A means top-tier. An F means unproven or suspicious.</p>
+      <p>Think of it like a <strong>FICO score for autonomous software</strong>. Before you let an agent access your API, spend your money, or act on your behalf — check the score.</p>
+      <p>Scores are curved across the population, so grades are always relative. An <span class="grade grade-A" style="font-size:0.68rem;vertical-align:1px">A</span> means top-tier. An <span class="grade grade-F" style="font-size:0.68rem;vertical-align:1px">F</span> means unproven or suspicious.</p>
     </div>
-    <div class="explain-visual">
-      <div class="ev-header">Agent: 0x4c91...eF5c</div>
-      <div class="ev-line"><span class="ev-key">score</span><span class="ev-val good">72</span></div>
-      <div class="ev-line"><span class="ev-key">grade</span><span class="ev-val good">A</span></div>
-      <div class="ev-line"><span class="ev-key">total_txns</span><span class="ev-val">1,247</span></div>
-      <div class="ev-line"><span class="ev-key">unique_counterparties</span><span class="ev-val">38</span></div>
-      <div class="ev-line"><span class="ev-key">active_months</span><span class="ev-val">5</span></div>
-      <div class="ev-line"><span class="ev-key">role</span><span class="ev-val">payer + payee</span></div>
-      <div class="ev-line"><span class="ev-key">chains</span><span class="ev-val">Base, Ethereum</span></div>
-      <div class="ev-line"><span class="ev-key">risk_flags</span><span class="ev-val good">none</span></div>
+    <div class="api-card">
+      <div class="api-card-header">
+        <span class="method">GET</span>
+        <span class="endpoint">/api/v1/score/{address}</span>
+      </div>
+      <div class="api-card-body">
+        <div>{</div>
+        <div>&nbsp;&nbsp;<span class="k">"address"</span>: <span class="s">"0x4c91...eF5c"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"score"</span>: <span class="n">72</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"grade"</span>: <span class="s">"A"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"total_txns"</span>: <span class="n">1247</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"counterparties"</span>: <span class="n">38</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"active_months"</span>: <span class="n">5</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"role"</span>: <span class="s">"payer+payee"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="k">"chains"</span>: [<span class="s">"base"</span>, <span class="s">"ethereum"</span>],</div>
+        <div>&nbsp;&nbsp;<span class="k">"risk_flags"</span>: <span class="b">[]</span></div>
+        <div>}</div>
+      </div>
     </div>
   </div>
 </section>
-</div>
 
 <hr class="divider">
 
-<div class="container">
 <section class="section">
-  <h2 class="section-title" style="margin-bottom:32px">How it works</h2>
+  <h2 class="section-title" style="margin-bottom:28px">How it works</h2>
   <div class="principles">
     <div class="principle">
-      <div class="principle-num">01</div>
+      <div class="principle-icon pi1">⛓️</div>
       <h3>On-chain only</h3>
       <p>No self-reported data. Every score is derived from verifiable on-chain transactions across x402, ERC-8004, and EIP-3009.</p>
     </div>
     <div class="principle">
-      <div class="principle-num">02</div>
+      <div class="principle-icon pi2">📊</div>
       <h3>Curved grading</h3>
       <p>Academic-style curve across the entire population. Grades are always relative — an A means something regardless of market conditions.</p>
     </div>
     <div class="principle">
-      <div class="principle-num">03</div>
+      <div class="principle-icon pi3">⚡</div>
       <h3>Free API</h3>
       <p>Look up any agent, gate access by trust score, or integrate into your payment flows. No API key required for public endpoints.</p>
     </div>
   </div>
 </section>
-</div>
 
 <hr class="divider">
 
-<div class="container">
 <section class="cta">
   <h2>Start checking agents</h2>
   <p>Free API. No signup required. Integrate trust into your agent workflows today.</p>
   <div class="cta-buttons">
-    <a href="#" class="btn btn-dark">Read the docs</a>
-    <a href="#" class="btn btn-outline">Browse agents</a>
+    <a href="#" class="btn btn-brand">Read the docs</a>
+    <a href="#" class="btn btn-ghost">Browse directory</a>
   </div>
 </section>
+
 </div>
 
 <footer>
@@ -377,7 +397,7 @@ footer{border-top:1px solid var(--bg3);padding:32px 0;color:var(--ink3);font-siz
 </div>
 </footer>
 
-<div class="preview">Brand Preview v2 — warm palette, editorial feel</div>
+<div class="preview">Brand Preview v3 — dark + color + editorial type</div>
 
 </body>
 </html>
