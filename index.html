@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentScore — Brand Preview</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Core palette — dark, premium feel */
+  --bg:#0b0f1a;
+  --bg2:#111827;
+  --bg3:#1a2235;
+  --bg4:#253049;
+  --surface:#151c2c;
+  --surface2:#1e2740;
+
+  --fg:#e8ecf4;
+  --fg2:#94a3b8;
+  --fg3:#64748b;
+
+  /* Brand green — the signature */
+  --green:#10b981;
+  --green-bright:#34d399;
+  --green-dim:#059669;
+  --green-glow:rgba(16,185,129,0.15);
+
+  /* Accent — electric blue for highlights */
+  --blue:#3b82f6;
+  --blue-glow:rgba(59,130,246,0.12);
+
+  /* Grades */
+  --grade-a:#10b981;
+  --grade-b:#3b82f6;
+  --grade-c:#f59e0b;
+  --grade-d:#f97316;
+  --grade-f:#ef4444;
+
+  --mono:'SF Mono',SFMono-Regular,ui-monospace,'Cascadia Mono',Consolas,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --max:1100px;
+  --radius:12px;
+  --radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--green-bright);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:var(--max);margin:0 auto;padding:0 24px}
+code,.mono{font-family:var(--mono)}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:0;background:rgba(11,15,26,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bg4);padding:16px 0;z-index:100}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;font-size:1.15rem;color:var(--fg);text-decoration:none;letter-spacing:-0.02em}
+.logo:hover{text-decoration:none}
+.logo span{color:var(--green)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:var(--fg2);font-size:0.9rem;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.nav-links a.active{color:var(--green)}
+
+/* ===== HERO ===== */
+.hero{padding:140px 0 100px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,var(--green-glow) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-size:clamp(2.8rem,6vw,4.2rem);font-weight:800;letter-spacing:-0.04em;line-height:1.08;margin-bottom:20px;color:var(--fg)}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--green-bright),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.15rem;color:var(--fg2);max-width:540px;margin:0 auto 44px;line-height:1.7}
+.hero-input{display:flex;gap:8px;max-width:540px;margin:0 auto}
+.hero-input input{flex:1;padding:14px 18px;background:var(--surface);border:1px solid var(--bg4);border-radius:var(--radius-sm);color:var(--fg);font-family:var(--mono);font-size:0.88rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.hero-input input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-glow)}
+.hero-input input::placeholder{color:var(--fg3)}
+.hero-input button{padding:14px 28px;background:var(--green);color:#fff;font-weight:600;border:none;border-radius:var(--radius-sm);cursor:pointer;font-size:0.95rem;transition:all .2s;white-space:nowrap}
+.hero-input button:hover{background:var(--green-bright);box-shadow:0 0 20px var(--green-glow)}
+
+/* ===== STATS BANNER ===== */
+.stats-banner{background:var(--surface);border-top:1px solid var(--bg4);border-bottom:1px solid var(--bg4);padding:48px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-item{position:relative}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--bg4)}
+.stat-val{font-size:2rem;font-weight:800;color:var(--fg);font-family:var(--mono);letter-spacing:-0.02em}
+.stat-val .accent{color:var(--green)}
+.stat-label{font-size:0.78rem;color:var(--fg3);margin-top:6px;letter-spacing:0.04em;text-transform:uppercase}
+
+/* ===== SECTIONS ===== */
+section{padding:80px 0}
+.section-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--green);margin-bottom:8px;font-weight:600}
+.section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;color:var(--fg)}
+.section-desc{color:var(--fg2);margin-bottom:40px;max-width:560px}
+
+/* ===== TABLE ===== */
+.table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--bg4);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+thead th{text-align:left;padding:14px 16px;color:var(--fg3);font-weight:500;border-bottom:1px solid var(--bg4);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em}
+tbody td{padding:14px 16px;border-bottom:1px solid rgba(37,48,73,0.5)}
+tbody tr{transition:background .15s;cursor:pointer}
+tbody tr:hover{background:var(--bg3)}
+.addr{font-family:var(--mono);font-size:0.82rem;color:var(--fg3)}
+.agent-name{font-weight:600;color:var(--fg);font-size:0.95rem}
+
+/* ===== GRADE BADGES ===== */
+.grade-badge{display:inline-flex;align-items:center;justify-content:center;width:36px;height:24px;border-radius:6px;font-weight:700;font-size:0.78rem;font-family:var(--mono)}
+.grade-A{background:rgba(16,185,129,0.15);color:var(--grade-a)}
+.grade-B{background:rgba(59,130,246,0.15);color:var(--grade-b)}
+.grade-C{background:rgba(245,158,11,0.15);color:var(--grade-c)}
+.grade-D{background:rgba(249,115,22,0.15);color:var(--grade-d)}
+.grade-F{background:rgba(239,68,68,0.15);color:var(--grade-f)}
+.role-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;background:var(--bg4);color:var(--fg2)}
+
+/* ===== CARDS ===== */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--bg4);border-radius:var(--radius);padding:24px;transition:all .2s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.card:hover{border-color:var(--green-dim);box-shadow:0 0 24px var(--green-glow);text-decoration:none;transform:translateY(-2px)}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.card-name{font-weight:700;color:var(--fg);font-size:1rem}
+.card-addr{font-family:var(--mono);font-size:0.75rem;color:var(--fg3);margin-bottom:10px}
+.card-stats{display:flex;gap:16px;font-size:0.8rem;color:var(--fg2)}
+
+/* ===== CTA ===== */
+.cta-section{text-align:center;padding:100px 0;position:relative}
+.cta-section::before{content:'';position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,var(--blue-glow) 0%,transparent 70%);pointer-events:none}
+.cta-section h2{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:12px}
+.cta-section p{color:var(--fg2);font-size:1.05rem;margin-bottom:32px}
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 28px;border-radius:var(--radius-sm);font-weight:600;font-size:0.95rem;cursor:pointer;border:none;text-decoration:none;transition:all .2s;display:inline-block}
+.btn:hover{text-decoration:none}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-bright);box-shadow:0 0 20px var(--green-glow)}
+.btn-secondary{background:var(--surface);color:var(--fg);border:1px solid var(--bg4)}
+.btn-secondary:hover{border-color:var(--fg3)}
+
+/* ===== FEATURES ===== */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.feature{background:var(--surface);border:1px solid var(--bg4);border-radius:var(--radius);padding:32px 24px}
+.feature-icon{font-size:1.6rem;margin-bottom:16px}
+.feature h3{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--fg)}
+.feature p{font-size:0.9rem;color:var(--fg2);line-height:1.6}
+
+/* ===== CHAIN PILLS ===== */
+.chain-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:32px}
+.chain-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface);border:1px solid var(--bg4);border-radius:20px;font-size:0.82rem;color:var(--fg2);font-family:var(--mono);transition:all .2s}
+.chain-pill:hover{border-color:var(--green-dim);color:var(--fg)}
+.chain-pill .count{font-weight:700;color:var(--green)}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--bg4);padding:40px 0;color:var(--fg3);font-size:0.85rem}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--fg3);transition:color .2s}
+.footer-links a:hover{color:var(--fg)}
+
+/* ===== BANNER ===== */
+.top-banner{background:linear-gradient(90deg,var(--green-dim),var(--blue));color:#fff;text-align:center;padding:10px 16px;font-size:0.85rem;font-weight:500}
+.top-banner a{color:#fff;text-decoration:underline;font-weight:600}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-item::after{display:none}
+  .features{grid-template-columns:1fr}
+  .hero{padding:100px 0 70px}
+  .hero-input{flex-direction:column}
+  .card-grid{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+
+/* ===== PREVIEW BADGE ===== */
+.preview-badge{position:fixed;bottom:24px;right:24px;background:var(--surface2);border:1px solid var(--bg4);border-radius:var(--radius-sm);padding:12px 20px;font-size:0.8rem;color:var(--fg2);z-index:200;backdrop-filter:blur(12px)}
+.preview-badge strong{color:var(--green)}
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  📊 <strong>New Research:</strong> 125M agent-to-agent payments analyzed. <a href="#">Read the report →</a>
+</div>
+
+<nav>
+<div class="container">
+  <a href="#" class="logo">Agent<span>Score</span></a>
+  <div class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#">Agent Directory</a>
+    <a href="#">Agent Economy</a>
+    <a href="#">Docs</a>
+    <a href="#">Research</a>
+  </div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+  <h1>The credit bureau<br>for <em>AI agents</em></h1>
+  <p>Trust grades built from real transaction history across 7 chains — not self-reported claims. Score and verify 220,000+ agents making agentic payments.</p>
+  <div class="hero-input">
+    <input type="text" placeholder="Enter agent address (0x...)" spellcheck="false">
+    <button>Look up</button>
+  </div>
+  <div class="chain-row">
+    <span class="chain-pill">Ethereum <span class="count">29.2K</span></span>
+    <span class="chain-pill">Base <span class="count">35.3K</span></span>
+    <span class="chain-pill">Arbitrum <span class="count">715</span></span>
+    <span class="chain-pill">Optimism <span class="count">464</span></span>
+    <span class="chain-pill">Avalanche <span class="count">1.7K</span></span>
+    <span class="chain-pill">Celo <span class="count">4.5K</span></span>
+    <span class="chain-pill">Gnosis <span class="count">3.2K</span></span>
+  </div>
+</div>
+</section>
+
+<section class="stats-banner">
+<div class="container">
+  <div class="stats-grid">
+    <div class="stat-item"><div class="stat-val"><span class="accent">220K+</span></div><div class="stat-label">Agents Scored</div></div>
+    <div class="stat-item"><div class="stat-val">770K+</div><div class="stat-label">Transactions</div></div>
+    <div class="stat-item"><div class="stat-val">7</div><div class="stat-label">Chains</div></div>
+    <div class="stat-item"><div class="stat-val">47K+</div><div class="stat-label">ERC-8004 Agents</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="section-label">Top Agents</div>
+  <h2 class="section-title">Highest-scored agents</h2>
+  <p class="section-desc">Real scores from real on-chain transaction history. Updated continuously.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Agent</th><th>Chain</th><th>Score</th><th>Grade</th><th>Type</th><th>Endpoints</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--fg3);font-family:var(--mono);font-size:0.8rem">1</td><td><span class="agent-name">Alfred Zhang</span><br><span class="addr">0x1a2b...8f3c</span></td><td style="color:var(--fg2)">Base</td><td><span class="mono" style="font-weight:700;color:var(--green)">72</span></td><td><span class="grade-badge grade-A">A</span></td><td><span class="role-tag">agent</span></td><td style="font-family:var(--mono);color:var(--fg2)">5</td></tr>
+      <tr><td style="color:var(--fg3);font-family:var(--mono);font-size:0.8rem">2</td><td><span class="agent-name">AgentEinstein</span><br><span class="addr">0x3c4d...a2e1</span></td><td style="color:var(--fg2)">Base</td><td><span class="mono" style="font-weight:700;color:var(--green)">70</span></td><td><span class="grade-badge grade-A">A</span></td><td><span class="role-tag">agent</span></td><td style="font-family:var(--mono);color:var(--fg2)">4</td></tr>
+      <tr><td style="color:var(--fg3);font-family:var(--mono);font-size:0.8rem">3</td><td><span class="agent-name">Agent Trust Vector</span><br><span class="addr">0x5e6f...c4d2</span></td><td style="color:var(--fg2)">Base</td><td><span class="mono" style="font-weight:700;color:var(--green)">69</span></td><td><span class="grade-badge grade-A">A</span></td><td><span class="role-tag">agent</span></td><td style="font-family:var(--mono);color:var(--fg2)">7</td></tr>
+      <tr><td style="color:var(--fg3);font-family:var(--mono);font-size:0.8rem">4</td><td><span class="agent-name">ClawdMint</span><br><span class="addr">0x7a8b...e5f3</span></td><td style="color:var(--fg2)">Base</td><td><span class="mono" style="font-weight:700;color:var(--green)">68</span></td><td><span class="grade-badge grade-A">A</span></td><td><span class="role-tag">agent</span></td><td style="font-family:var(--mono);color:var(--fg2)">6</td></tr>
+      <tr><td style="color:var(--fg3);font-family:var(--mono);font-size:0.8rem">5</td><td><span class="agent-name">CHAOS Agent</span><br><span class="addr">0x9c0d...f6a4</span></td><td style="color:var(--fg2)">Base</td><td><span class="mono" style="font-weight:700;color:var(--green)">68</span></td><td><span class="grade-badge grade-A">A</span></td><td><span class="role-tag">agent</span></td><td style="font-family:var(--mono);color:var(--fg2)">3</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="text-align:center;margin-top:24px"><a href="#" class="btn btn-secondary" style="font-size:0.9rem;padding:10px 24px">Browse all agents →</a></div>
+</div>
+</section>
+
+<section style="background:var(--bg2)">
+<div class="container">
+  <div class="section-label">Why AgentScore</div>
+  <h2 class="section-title">Trust infrastructure for the agent economy</h2>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">🔍</div>
+      <h3>Real Transaction Data</h3>
+      <p>Scores derived from on-chain payment history — x402, ERC-8004, and EIP-3009 transactions across 7 chains.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <h3>Academic Grading</h3>
+      <p>Curved scoring with A+ through F grades. Fair comparisons across agents of all sizes and activity levels.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>Free API</h3>
+      <p>Integrate trust checks into your agent workflows. Gate access by score, verify counterparties, assess risk.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="section-label">Identified Agents</div>
+  <h2 class="section-title">Named agents in the ecosystem</h2>
+  <p class="section-desc">Matched to the ERC-8004 agent registry. Verified identities with real transaction histories.</p>
+  <div class="card-grid">
+    <a class="card" href="#">
+      <div class="card-top"><span class="card-name">Alfred Zhang</span><span class="grade-badge grade-A">A · 72</span></div>
+      <div class="card-addr">0x1a2b...8f3c</div>
+      <div class="card-stats"><span class="role-tag">agent</span><span>1,247 txns</span><span>5 months</span></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-top"><span class="card-name">AgentEinstein</span><span class="grade-badge grade-A">A · 70</span></div>
+      <div class="card-addr">0x3c4d...a2e1</div>
+      <div class="card-stats"><span class="role-tag">agent</span><span>892 txns</span><span>4 months</span></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-top"><span class="card-name">Meerkat Destiny</span><span class="grade-badge grade-A">A · 67</span></div>
+      <div class="card-addr">0x5e6f...c4d2</div>
+      <div class="card-stats"><span class="role-tag">agent</span><span>634 txns</span><span>4 months</span></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-top"><span class="card-name">molty.cash</span><span class="grade-badge grade-B">B · 65</span></div>
+      <div class="card-addr">0x7a8b...e5f3</div>
+      <div class="card-stats"><span class="role-tag">agent</span><span>412 txns</span><span>6 months</span></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-top"><span class="card-name">Captain Dackie</span><span class="grade-badge grade-B">B · 65</span></div>
+      <div class="card-addr">0x9c0d...f6a4</div>
+      <div class="card-stats"><span class="role-tag">agent</span><span>378 txns</span><span>6 months</span></div>
+    </a>
+    <a class="card" href="#">
+      <div class="card-top"><span class="card-name">Delx Agent</span><span class="grade-badge grade-B">B · 68</span></div>
+      <div class="card-addr">0xb1c2...d7e5</div>
+      <div class="card-stats"><span class="role-tag">agent</span><span>256 txns</span><span>3 months</span></div>
+    </a>
+  </div>
+</div>
+</section>
+
+<section class="cta-section" style="background:var(--bg2)">
+<div class="container">
+  <h2>Integrate agent reputation</h2>
+  <p>Use the AgentScore API to gate access by trust score. Free and open.</p>
+  <div class="btn-row">
+    <a href="#" class="btn btn-primary">Read the docs</a>
+    <a href="#" class="btn btn-secondary">Browse agents</a>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+  <div class="footer-inner">
+    <span>&copy; 2026 AgentScore</span>
+    <div class="footer-links">
+      <a href="#">Docs</a>
+      <a href="#">GitHub</a>
+      <a href="#">X</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</div>
+</footer>
+
+<div class="preview-badge">
+  <strong>Brand Preview</strong> — updated dark theme proposal
+</div>
+
+</body>
+</html>
